@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>SmartBell</title>
+  <meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    const command = (method, url, json = null, callback = null, log = true) => {
+      let udid = $('#_udid').val();
+
+      method(`http://localhost:3000/${url}?udid=${udid}`, json).always((data) => {
+        if (log) console.log(data);
+
+        data = JSON.parse(data);
+        if (typeof callback === 'function') callback({ u: udid, r: data.result, e: data.error, v: data.value, all: data });
+      });
+    };
+
+    const commandG = (url, callback) => { command($.get, url, null, callback, log); };
+  </script>
+</head>
+
+<body>
+  <div id="Testyd" style="display:none;">
+  </div>
+</body>
+
+</html>

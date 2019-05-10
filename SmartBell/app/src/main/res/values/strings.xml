@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SmartBell</string>
+    <string name="price">%.0f원</string>
+    <string name="adapter_main_button">주문하기</string>
+    <string name="alert_order">%s\n주문 되었습니다.</string>
+    <string name="ok">확인</string>
+</resources>

@@ -5,10 +5,23 @@
   <title>SmartBell</title>
   <meta charset="utf-8" />
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    function getList() {
+      method(`http://localhost:3000/orders`).always(list => {
+        data = JSON.parse(data);
+      });
+    };
+
+    $(document).ready(function() {
+      setInterval("getList()", 1000); 
+    });
+  </script>
+
 </head>
 
 <body>
-  <div id="Testyd" style="display:none;">
+  <div id="smart" style="display:none;">
   </div>
 </body>
 

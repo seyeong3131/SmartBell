@@ -7,21 +7,20 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <script>
-    function printTime() {
-      var today = new Date();
-      var hh = today.getHours();
-      var mi = today.getMinutes();
-      var ss = today.getSeconds();
-      document.getElementById("result").innerHTML = hh + ":" + mi + ":" + ss;
+    var url = 'http://smartbell.cafe24app.com'
+    var timerId = null;
+
+    function getList() {
+      $.get(`http://localhost:8001/orders`).always(data => {
+        document.getElementById("result").innerHTML = data
+      });
     }
 
-  var timerId = null;
-
-    function startClock() {
-        timerId = setInterval(printTime, 1000);
+    function startSystem() {
+        timerId = setInterval(getList, 1000);
     }
 
-    function stopClock() {
+    function stopSystem() {
         if (timerId != null)
             clearInterval(timerId);
     }
@@ -30,8 +29,9 @@
 </head>
 
 <body>
-  <input type="button" value="시작" onclick="startClock();" />
-  <input type="button" value="중지" onclick="stopClock();" />
+  <input type="button" value="시스템 구동" onclick="startSystem();" />
+  <input type="button" value="시스템 정지" onclick="stopSystem();" />
+  <br><br><br><br>
 
   <div id="result"></div>
 </body>

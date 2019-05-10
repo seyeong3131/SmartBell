@@ -19,21 +19,34 @@ public class MainActivity extends Activity {
         adapter = new MainAdapter(this);
         listView.setAdapter(adapter);
 
-        adapter.setListener(drink -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder .setTitle(R.string.app_name)
-                    .setMessage(getString(R.string.alert_order, drink.getName()))
-                    .setPositiveButton(R.string.ok, null);
-
-            AlertDialog dialog = builder.create();
-            dialog.setCancelable(false);
-            dialog.show();
-        });
+        adapter.setListener(this::setListener);
 
         init();
     }
 
     private void init() {
         adapter.setItems(Menu.sample(this));
+    }
+
+
+    @SuppressWarnings("all")
+    private void setListener(Menu menu) {
+        ApiManager.shared().order(menu, (error, response) ->
+            alert(response != null && response.body(), menu)
+        );
+    }
+
+
+    private void alert(boolean result, Menu menu) {
+        String message = getString(result ? R.string.alert_order_success : R.string.alert_order_failure, menu.getName());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder .setTitle(R.string.app_name)
+                .setMessage(message)
+                .setPositiveButton(R.string.ok, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

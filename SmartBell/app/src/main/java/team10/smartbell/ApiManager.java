@@ -15,18 +15,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.internal.EverythingIsNonNull;
 
-public class ApiManager {
-    private static String URL = "localhost";
+class ApiManager {
+    private static final String URL = "http://localhost/";
+
 
     private static WeakReference<ApiManager> reference;
 
-    public static ApiManager shared() {
+    static ApiManager shared() {
         Object instance = (reference != null) ? reference.get() : null;
 
         if (instance == null)
             reference = new WeakReference<>(new ApiManager());
         return reference.get();
     }
+
+
+
+    private ApiInterface api;
+
+    private ApiManager() {
+        api = getRetrofit().create(ApiInterface.class);
+    }
+
 
     private Retrofit getRetrofit() {
         return new Retrofit.Builder()
@@ -66,11 +76,18 @@ public class ApiManager {
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
+                callback.accept(null, response);
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
+                callback.accept(t, null);
             }
         });
+    }
+
+
+    void order(Menu menu, BiConsumer<Throwable, Response<Boolean>> callback) {
+        request(api.order(menu.getName()), callback);
     }
 }

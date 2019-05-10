@@ -14,7 +14,7 @@ app.use(session({
 
 app.use('/index', express.static(__dirname + '/index.html'));
 
-app.listen(8001, () => { console.info('Express server has started on port 8001'); });
+app.listen(80, () => { console.info('Express server has started on port 80'); });
 
 
 var orders = {}

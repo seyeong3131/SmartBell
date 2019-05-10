@@ -7,23 +7,20 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <script>
-    const command = (method, url, json = null, callback = null, log = true) => {
-      let udid = $('#_udid').val();
-
-      method(`http://localhost:3000/${url}?udid=${udid}`, json).always((data) => {
-        if (log) console.log(data);
-
+    function getList() {
+      method(`http://localhost:3000/orders`).always(list => {
         data = JSON.parse(data);
-        if (typeof callback === 'function') callback({ u: udid, r: data.result, e: data.error, v: data.value, all: data });
       });
     };
 
-    const commandG = (url, callback) => { command($.get, url, null, callback, log); };
+    $(document).ready(function() {
+      setInterval("getList()", 1000); 
+    });
   </script>
 </head>
 
 <body>
-  <div id="Testyd" style="display:none;">
+  <div id="smart" style="display:none;">
   </div>
 </body>
 

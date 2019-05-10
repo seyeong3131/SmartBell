@@ -12,9 +12,9 @@ app.use(session({
 }));
 
 
-app.use('/index', express.static(__dirname + '/index.html'));
+app.use('/index', express.static('/index.html'));
 
-app.listen(80, () => { console.info('Express server has started on port 80'); });
+app.listen(8001, () => { console.info('Express server has started on port 8001'); });
 
 
 var orders = {}
@@ -25,6 +25,5 @@ app.get('/order', (req, res) => {
 });
 
 app.get('/orders', (req, res) => {
-	var tttt = JSON.stringify(orders)
 	res.status(200).send(JSON.stringify(orders));
 });

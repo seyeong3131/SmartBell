@@ -7,21 +7,35 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <script>
-    function getList() {
-      method(`http://localhost:3000/orders`).always(list => {
-        data = JSON.parse(data);
-      });
-    };
+    function printTime() {
+      var today = new Date();
+      var hh = today.getHours();
+      var mi = today.getMinutes();
+      var ss = today.getSeconds();
+      document.getElementById("result").innerHTML = hh + ":" + mi + ":" + ss;
+    }
 
-    $(document).ready(function() {
-      setInterval("getList()", 1000); 
-    });
+  var timerId = null;
+
+    function startClock() {
+        timerId = setInterval(printTime, 1000);
+    }
+
+    function stopClock() {
+        if (timerId != null)
+            clearInterval(timerId);
+    }
   </script>
 </head>
 
 <body>
-  <div id="smart" style="display:none;">
-  </div>
+  <input type="button" value="시작" onclick="startClock();" />
+  <input type="button" value="중지" onclick="stopClock();" />
+
+  <div id="result"></div>
 </body>
 
 </html>
+
+
+<!-- http://seyeong3131.cafe24.com -->

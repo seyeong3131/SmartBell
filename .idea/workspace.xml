@@ -11,10 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a843a6d-5cfc-4721-9411-2af093038714" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/ApiInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/MenuFirebaseMessagingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartBell/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartBell/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/ApiManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/ApiManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/src/main/java/team10/smartbell/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartBell/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartBell/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartBell/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/SmartBell/gradle.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,33 +103,6 @@
               <item name="SmartBell" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
               <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartBell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartBell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartBell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartBell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartBell" type="462c0819:PsiDirectoryNode" />
-              <item name="gradle" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />

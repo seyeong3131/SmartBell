@@ -14,6 +14,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MenuFirebaseMessagingService.init(this);
+
         ListView listView = findViewById(R.id.activity_main_listview);
 
         adapter = new MainAdapter(this);

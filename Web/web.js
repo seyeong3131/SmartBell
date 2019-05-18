@@ -25,6 +25,5 @@ app.get('/order', (req, res) => {
 });
 
 app.get('/orders', (req, res) => {
-	var tttt = JSON.stringify(orders)
 	res.status(200).send(JSON.stringify(orders));
 });

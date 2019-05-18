@@ -16,7 +16,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.internal.EverythingIsNonNull;
 
 class ApiManager {
-    private static final String URL = "http://localhost/";
+    private static final String URL = "http://smartbell.cafe24app.com/";
 
 
     private static WeakReference<ApiManager> reference;

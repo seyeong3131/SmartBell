@@ -31,13 +31,13 @@ app.get('/orders', (req, res) => {
 	res.status(200).send(JSON.stringify(orders));
 });
 
-app.get('/completed', (req, res) => {
+app.get('/completed', (req, res) => {	
 	var data = {
-		to: orders[req.query.token],
+		to: req.query.token,
 		notification: {
 			title: "SmartBell",
 			body: "메뉴가 준비되었습니다.",
-			sound: "default",
+			sound: "default"
 		},
 		priority: "high",
 		restricted_package_name: "team10.smartbell",
@@ -46,6 +46,7 @@ app.get('/completed', (req, res) => {
 	};
 
 	fcm.send(data, function(err, response) {
+		if (orders[req.query.token] == null) return
 		delete orders[req.query.token]
 
 		if (err) {

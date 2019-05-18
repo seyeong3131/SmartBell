@@ -1,5 +1,7 @@
 package team10.smartbell;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.lang.ref.WeakReference;
 import java.util.function.BiConsumer;
 
@@ -88,6 +90,11 @@ class ApiManager {
 
 
     void order(Menu menu, BiConsumer<Throwable, Response<Boolean>> callback) {
-        request(api.order(menu.getName()), callback);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+            if (task.getResult() == null) return;
+
+            String token = task.getResult().getToken();
+            request(api.order(token, menu.getName()), callback);
+        });
     }
 }

@@ -6,5 +6,5 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("order")
-    Call<Boolean> order(@Query("name") String name);
+    Call<Boolean> order(@Query("token") String token, @Query("name") String name);
 }

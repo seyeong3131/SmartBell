@@ -18,7 +18,7 @@
 
     function getList() {
       $.get(`http://localhost:8001/orders`).always(data => {
-        document.getElementById("result").innerHTML = data
+        document.getElementById("list").innerHTML = '<li>메뉴 이름 <input type="button" name="토큰 이름" value="주문완료" style="vertical-align:bottom;"></li><br>'
       });
     }
 
@@ -40,11 +40,16 @@
   <br><br>
   
   <div class="content" data-role="content">
+
     <h3>주문 목록</h3>
-    <ul data-role="listview">
+    <ul id="list" data-role="listview">
+    </ul>
+
+    
+    <!-- <ul data-role="listview">
       <li><a href="#">목록</li>
       <li><a href="#">data</li>
-    </ul>
+    </ul> -->
   </div>
 </body>
 

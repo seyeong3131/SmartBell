@@ -1,8 +1,17 @@
 package team10.smartbell;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+import org.json.JSONArray;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 import okhttp3.Headers;
@@ -89,12 +98,20 @@ class ApiManager {
     }
 
 
-    void order(Menu menu, BiConsumer<Throwable, Response<Boolean>> callback) {
+    void order(List<Menu> orders, BiConsumer<Throwable, Response<Boolean>> callback) {
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
             if (task.getResult() == null) return;
 
             String token = task.getResult().getToken();
-            request(api.order(token, menu.getName()), callback);
+
+            JsonArray array = new JsonArray();
+            for (Menu menu : orders)
+                array.add(menu.getName());
+
+            JsonObject object = new JsonObject();
+            object.add("menus", array);
+
+            request(api.order(token, object.toString()), callback);
         });
     }
 }

@@ -3,10 +3,20 @@ package team10.smartbell;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class MainActivity extends Activity {
-    private MainAdapter adapter;
+    private MainAdapter adapter1, adapter2;
+
+    private List<Menu> orders;
 
 
     @Override
@@ -16,31 +26,57 @@ public class MainActivity extends Activity {
 
         MenuFirebaseMessagingService.init(this);
 
-        ListView listView = findViewById(R.id.activity_main_listview);
 
-        adapter = new MainAdapter(this);
-        listView.setAdapter(adapter);
+        ListView listView1 = findViewById(R.id.activity_main_listview1);
+        ListView listView2 = findViewById(R.id.activity_main_listview2);
 
-        adapter.setListener(this::setListener);
+        adapter1 = new MainAdapter(this);
+        listView1.setAdapter(adapter1);
+
+        adapter2 = new MainAdapter(this);
+        listView2.setAdapter(adapter2);
+
+        adapter1.setListener("주문", this::setListener1);
+        adapter2.setListener("취소", this::setListener2);
+
+        findViewById(R.id.menu1_button).setOnClickListener(v -> {
+            listView1.setVisibility(View.VISIBLE);
+            listView2.setVisibility(View.GONE);
+        });
+
+        findViewById(R.id.menu2_button).setOnClickListener(v -> {
+            listView2.setVisibility(View.VISIBLE);
+            listView1.setVisibility(View.GONE);
+
+            adapter2.setItems(orders);
+        });
+
+        findViewById(R.id.order_button).setOnClickListener(v -> {
+            ApiManager.shared().order(orders, (error, response) -> alert(error == null)
+            );
+        });
 
         init();
     }
 
     private void init() {
-        adapter.setItems(Menu.sample(this));
+        orders = new ArrayList<>();
+        adapter1.setItems(Menu.sample(this));
     }
 
-
-    @SuppressWarnings("all")
-    private void setListener(Menu menu) {
-        ApiManager.shared().order(menu, (error, response) ->
-            alert(response != null && response.body(), menu)
-        );
+    @SuppressWarnings("unused")
+    private void setListener1(int position, Menu menu) {
+        orders.add(menu);
     }
 
+    private void setListener2(int position, Menu menu) {
+        orders.remove(position);
+        adapter2.setItems(orders);
+        adapter2.notifyDataSetChanged();
+    }
 
-    private void alert(boolean result, Menu menu) {
-        String message = getString(result ? R.string.alert_order_success : R.string.alert_order_failure, menu.getName());
+    private void alert(boolean result) {
+        String message = getString(result ? R.string.alert_order_success : R.string.alert_order_failure);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder .setTitle(R.string.app_name)

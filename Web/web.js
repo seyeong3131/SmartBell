@@ -23,7 +23,7 @@ app.listen(8001, () => { console.info('Express server has started on port 8001')
 var orders = {}
 
 app.get('/order', (req, res) => {
-	orders[req.query.token] = req.query.name;
+	orders[req.query.token] = req.query.menus;
 	res.status(200).send(true);
 });
 

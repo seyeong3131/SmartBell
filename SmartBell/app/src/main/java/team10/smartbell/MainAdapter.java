@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class MainAdapter extends android.widget.BaseAdapter {
@@ -30,10 +31,11 @@ public class MainAdapter extends android.widget.BaseAdapter {
     }
 
 
-    private Context context;
+    private Context     context;
+    private List<Menu>  items;
 
-    private List<Menu>     items;
-    private Consumer<Menu> listener;
+    private BiConsumer<Integer, Menu>   listener;
+    private String                      buttonText;
 
 
     MainAdapter(Context context) {
@@ -48,8 +50,9 @@ public class MainAdapter extends android.widget.BaseAdapter {
         notifyDataSetChanged();
     }
 
-    void setListener(Consumer<Menu> listener) {
-        this.listener = listener;
+    void setListener(String buttonText, BiConsumer<Integer, Menu> listener) {
+        this.buttonText = buttonText;
+        this.listener   = listener;
     }
 
 
@@ -104,7 +107,8 @@ public class MainAdapter extends android.widget.BaseAdapter {
                 break;
         }
 
-        viewHolder.button.setOnClickListener(v -> listener.accept(menu));
+        viewHolder.button.setText(buttonText);
+        viewHolder.button.setOnClickListener(v -> listener.accept(position, menu));
         return convertView;
     }
 }

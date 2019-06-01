@@ -4,14 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class MainActivity extends Activity {
     private MainAdapter adapter1, adapter2;
@@ -25,7 +21,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         MenuFirebaseMessagingService.init(this);
-
 
         ListView listView1 = findViewById(R.id.activity_main_listview1);
         ListView listView2 = findViewById(R.id.activity_main_listview2);
@@ -52,8 +47,19 @@ public class MainActivity extends Activity {
         });
 
         findViewById(R.id.order_button).setOnClickListener(v -> {
-            ApiManager.shared().order(orders, (error, response) -> alert(error == null)
-            );
+            if (orders.size() == 0) return;
+
+            new OrderDialog(this, orders, () ->
+                    ApiManager.shared().order(orders, (error, response) -> {
+                        if (error == null) {
+                            orders.clear();
+                            adapter2.setItems(orders);
+                            adapter2.notifyDataSetChanged();
+                        }
+
+                        alert(error == null);
+                    })
+            ).show();
         });
 
         init();
@@ -69,6 +75,7 @@ public class MainActivity extends Activity {
         orders.add(menu);
     }
 
+    @SuppressWarnings("unused")
     private void setListener2(int position, Menu menu) {
         orders.remove(position);
         adapter2.setItems(orders);

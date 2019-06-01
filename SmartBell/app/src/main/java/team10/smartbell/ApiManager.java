@@ -2,15 +2,9 @@ package team10.smartbell;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-
-import org.json.JSONArray;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -99,19 +93,23 @@ class ApiManager {
 
 
     void order(List<Menu> orders, BiConsumer<Throwable, Response<Boolean>> callback) {
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
-            if (task.getResult() == null) return;
+        try {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+                if (task.getResult() == null) return;
 
-            String token = task.getResult().getToken();
+                String token = task.getResult().getToken();
 
-            JsonArray array = new JsonArray();
-            for (Menu menu : orders)
-                array.add(menu.getName());
+                JsonArray array = new JsonArray();
+                for (Menu menu : orders)
+                    array.add(menu.getName());
 
-            JsonObject object = new JsonObject();
-            object.add("menus", array);
+                JsonObject object = new JsonObject();
+                object.add("menus", array);
 
-            request(api.order(token, object.toString()), callback);
-        });
+                request(api.order(token, object.toString()), callback);
+            });
+        } catch (Exception e) {
+            callback.accept(e, null);
+        }
     }
 }

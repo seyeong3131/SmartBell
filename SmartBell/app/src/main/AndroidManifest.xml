@@ -27,7 +27,6 @@
             </intent-filter>
         </activity>
 
-
         <service
             android:name=".MenuFirebaseMessagingService"
             android:exported="false">

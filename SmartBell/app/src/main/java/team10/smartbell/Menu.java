@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class Menu {
@@ -50,7 +51,9 @@ public class Menu {
     @SuppressWarnings("all")
     public static List<Menu> sample(Context context) {
         try {
-            InputStream stream = context.getAssets().open("sample.json");
+            Locale locale   = context.getResources().getConfiguration().getLocales().get(0);
+            String language = locale.getLanguage();
+            InputStream stream = context.getAssets().open(language.contains("ko") ? "sample.json" : "sample_china.json");
 
             byte[] buffer = new byte[stream.available()];
             stream.read(buffer);

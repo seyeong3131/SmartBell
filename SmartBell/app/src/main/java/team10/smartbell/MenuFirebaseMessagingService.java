@@ -28,9 +28,6 @@ public class MenuFirebaseMessagingService extends FirebaseMessagingService {
 
 
     public static void init(Context context) {
-        FirebaseMessaging.getInstance().subscribeToTopic("ALL");
-        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationChannel channel = new NotificationChannel(
@@ -47,8 +44,10 @@ public class MenuFirebaseMessagingService extends FirebaseMessagingService {
 
         if (manager != null)
             manager.createNotificationChannel(channel);
-    }
 
+        FirebaseMessaging.getInstance().subscribeToTopic("ALL");
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

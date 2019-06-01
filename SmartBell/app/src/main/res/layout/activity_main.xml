@@ -10,6 +10,7 @@
         android:layout_height="70dp"
         android:gravity="center"
         android:text="@string/app_name"
+        android:textAllCaps="false"
         android:textColor="@android:color/primary_text_dark"
         android:textStyle="bold"
         android:background="@android:color/holo_orange_light" />
@@ -28,6 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/menu1"
+            android:textAllCaps="false"
             android:textColor="@drawable/menu_button_selector"
             android:textStyle="bold"
             android:background="#ffffff" />
@@ -41,6 +43,7 @@
             android:layout_marginStart="1dp"
             android:gravity="center"
             android:text="@string/menu2"
+            android:textAllCaps="false"
             android:textColor="@drawable/menu_button_selector"
             android:textStyle="bold"
             android:background="#ffffff" />
@@ -78,6 +81,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:text="@string/order"
+            android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:background="@drawable/order_button_selector" />
